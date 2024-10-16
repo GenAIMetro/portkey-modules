@@ -19,9 +19,6 @@ variable "addon_tags" {
 variable "rds_instance_size" {
   type = string
 }
-variable "rds_instance_names" {
-  type = any
-}
 variable "db_name" {
   type = string
 }
