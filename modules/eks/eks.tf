@@ -74,10 +74,14 @@ module "eks" {
   )
 
 
-
+kms_key_administrators = local.admin_arn
+  
   tags = merge(local.default_tags)
 }
 
+locals {
+  admin_arn = [ for users in data.aws_iam_group.admin_group.users : users.arn ]
+}
 data "aws_iam_group" "admin_group" {
   group_name = var.iam_admin_group
 }
