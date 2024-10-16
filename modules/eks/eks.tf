@@ -2,7 +2,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 19.0"
 
-  cluster_name                   = "${var.name}-${var.environment}-cluster"
+  cluster_name                   = "${var.name}-${var.environment}-eks-cluster"
   cluster_version                = var.k8s_version
   cluster_endpoint_public_access = true
   create_cloudwatch_log_group    = false
@@ -39,7 +39,7 @@ module "eks" {
 
   eks_managed_node_groups = { for node_name, node_specs in var.node_group_specs :
     node_name => {
-      name           = "${var.name}-${var.environment}-${node_name}"
+      name           = "${var.name}-${var.environment}-eks-${node_name}"
       min_size       = node_specs.min_size
       max_size       = node_specs.max_size
       desired_size   = node_specs.desire_size
